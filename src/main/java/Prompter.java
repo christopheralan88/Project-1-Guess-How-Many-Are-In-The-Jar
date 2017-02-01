@@ -3,11 +3,21 @@ import java.util.Scanner;
 
 public class Prompter {
 
-    Scanner scanner;
+    public static int incorrectGuesses;
+    public static Jar jar;
+    private Scanner scanner;
 
 
     public Prompter() {
         scanner = new Scanner(System.in);
+    }
+
+    public void play() {
+        String itemName = promptForItem();
+        int maxNumberOfItems = promptForMaxNumberOfItems(itemName);
+        jar = new Jar(itemName, maxNumberOfItems);
+        int guess = promptForGuess(jar);
+        won(guess, jar);
     }
 
     public String promptForItem() {
@@ -48,12 +58,12 @@ public class Prompter {
     public void won(int guess, Jar jar) {
         while (guess != jar.getNumberOfItems()) {
             guessIsTooHighOrTooLow(guess, jar);
-            Game.incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is incorrect.
+            incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is incorrect.
             System.out.println("Sorry that's not the right number of items in the jar.  Try again.");
             guess = scanner.nextInt();
         }
-        Game.incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is correct.
-        System.out.printf("You got it in %d attempt(s) %n", Game.incorrectGuesses);
+        incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is correct.
+        System.out.printf("You got it in %d attempt(s) %n", incorrectGuesses);
         System.exit(0);
     }
 
