@@ -1,6 +1,7 @@
 
 public class Game {
 
+    public static int incorrectGuesses;
     public static Prompter prompter;
 
 

@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class Prompter {
 
-    public static int incorrectGuesses;
-    public static Jar jar;
     private Scanner scanner;
+    public static Jar jar;
 
 
     public Prompter() {
@@ -58,12 +57,12 @@ public class Prompter {
     public void won(int guess, Jar jar) {
         while (guess != jar.getNumberOfItems()) {
             guessIsTooHighOrTooLow(guess, jar);
-            incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is incorrect.
+            Game.incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is incorrect.
             System.out.println("Sorry that's not the right number of items in the jar.  Try again.");
             guess = scanner.nextInt();
         }
-        incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is correct.
-        System.out.printf("You got it in %d attempt(s) %n", incorrectGuesses);
+        Game.incorrectGuesses++; // Increment incorrectGuesses by 1 if the guess is correct.
+        System.out.printf("You got it in %d attempt(s) %n", Game.incorrectGuesses);
         System.exit(0);
     }
 
